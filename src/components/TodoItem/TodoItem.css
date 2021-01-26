@@ -1,0 +1,32 @@
+.item {
+    display: flex;
+    align-items: center;
+    background: #f3f3f3;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: .5rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.checkbox {
+    transform: scale(1.4);
+    margin-right: 1rem;
+}
+
+strong {
+    font-size: 18px;
+}
+
+.title {
+    font-size: 18px;
+    margin-left: 1rem;
+}
+
+.done {
+    text-decoration: line-through;
+}
+
+.deleteIcon {
+    color: #f50057;
+    margin-left: auto;
+}
