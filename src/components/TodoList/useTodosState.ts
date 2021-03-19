@@ -18,11 +18,13 @@ export const useTodosState = () => {
                 break;
             default:
                 const fetchedTodos = fetchingTodos.contents;
-                const newTodos = [...todos, ...fetchedTodos];
+                const newTodos = multiplier === 0
+                    ? fetchedTodos
+                    : [...todos, ...fetchedTodos];
                 setTodos(newTodos);
                 setFetchingState('hasValue');
         }
     }, [fetchingTodos]);
 
-    return { todos, fetchingState };
+    return { todos, fetchingState, loadMoreTodos: () => setMultiplier(prev => prev + 1) };
 };

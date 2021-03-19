@@ -18,7 +18,7 @@ export const getTodosList = selector({
     key: 'getTodosList',
     get: async ({ get }) => {
         const multiplier = get(todosMultiplier);
-        const query = `?_page=${10 * multiplier}$_limit=10`;
+        const query = `?_page=${multiplier}$_limit=10`;
 
         return await axios.get(fetchUrl + query)
             .then(res => res.data);

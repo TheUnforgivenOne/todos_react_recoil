@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useRecoilState } from 'recoil';
 import { todoListState } from '../../atoms/todoListState';
+import { replaceItemAtIndex } from './utils';
 
 import './TodoItem.css';
 
@@ -18,7 +19,7 @@ interface TodoItemProps {
     classes: Array<string>
 }
 
-const TodoItem: React.FunctionComponent<TodoItemProps> = ({ item, index, classes }) => {
+const TodoItem = forwardRef<HTMLLIElement, TodoItemProps>(({ item, index, classes }, ref) => {
     const [todoList, setTodoList] = useRecoilState(todoListState);
 
     const toggleTodo = () => {
@@ -35,7 +36,7 @@ const TodoItem: React.FunctionComponent<TodoItemProps> = ({ item, index, classes
     };
 
     return (
-        <li key={item.id} className='item'>
+        <li ref={ref} key={item.id} className='item'>
             <input
                 type='checkbox'
                 className='checkbox'
@@ -47,14 +48,6 @@ const TodoItem: React.FunctionComponent<TodoItemProps> = ({ item, index, classes
             <DeleteIcon className="deleteIcon" onClick={() => deleteTodo(item.id)} />
         </li>
     )
-};
-
-const replaceItemAtIndex = (
-    arr: TodoItemInterface[],
-    index: number,
-    newValue: TodoItemInterface
-) => {
-    return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-};
+});
 
 export default TodoItem;
