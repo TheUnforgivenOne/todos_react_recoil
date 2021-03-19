@@ -10,10 +10,9 @@ const AddTodo: React.FunctionComponent = () => {
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
-    }
+    };
 
     const addTodo = () => {
-        // @ts-ignore
         setTodoList((oldTodoList) => [
             {
                 userId: 1,
@@ -23,13 +22,13 @@ const AddTodo: React.FunctionComponent = () => {
             },
             ...oldTodoList,
         ]);
-    }
+    };
 
     const submitHandler = (event: React.FormEvent) => {
         event.preventDefault();
         addTodo();
         setTitle('');
-    }
+    };
 
     return (
         <form onSubmit={submitHandler} className='form'>
@@ -43,6 +42,6 @@ const AddTodo: React.FunctionComponent = () => {
             <button type='submit'>Add todo</button>
         </form>
     )
-}
+};
 
 export default AddTodo;

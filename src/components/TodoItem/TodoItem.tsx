@@ -5,8 +5,15 @@ import { todoListState } from '../../atoms/todoListState';
 
 import './TodoItem.css';
 
+export interface TodoItemInterface {
+    userId: number;
+    id: number;
+    title: string;
+    completed: boolean;
+}
+
 interface TodoItemProps {
-    item: {userId: number, id: number, title: string, completed: boolean},
+    item: TodoItemInterface,
     index: number,
     classes: Array<string>
 }
@@ -18,14 +25,14 @@ const TodoItem: React.FunctionComponent<TodoItemProps> = ({ item, index, classes
         const newList: any = replaceItemAtIndex(todoList, index, {
             ...item,
             completed: !item.completed,
-        })
+        });
         setTodoList(newList);
-    }
+    };
 
     const deleteTodo = (id: number) => {
         const newList: any = todoList.filter((todo: any) => todo.id !== id);
         setTodoList(newList);
-    }
+    };
 
     return (
         <li key={item.id} className='item'>
@@ -40,14 +47,14 @@ const TodoItem: React.FunctionComponent<TodoItemProps> = ({ item, index, classes
             <DeleteIcon className="deleteIcon" onClick={() => deleteTodo(item.id)} />
         </li>
     )
-}
+};
 
 const replaceItemAtIndex = (
-    arr: { id: number; completed: boolean; title: string; userId: number }[],
+    arr: TodoItemInterface[],
     index: number,
-    newValue: { id: number; completed: boolean; title: string; userId: number }
+    newValue: TodoItemInterface
 ) => {
     return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-}
+};
 
 export default TodoItem;

@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import AddTodo from '../AddTodo/AddTodo';
 import TodoList from '../TodoList/TodoList';
 
@@ -9,11 +9,9 @@ const App: React.FunctionComponent = () => {
     <div className='container'>
       <h1>TODOS app (React + Recoil)</h1>
       <AddTodo />
-      <Suspense fallback={<div>Loading</div>}>
-        <TodoList />
-      </Suspense>
+      <TodoList />
     </div>
   );
-}
+};
 
 export default App;
