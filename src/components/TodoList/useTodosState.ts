@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
-import { getTodosList, todoListState, todosMultiplier } from '../../atoms/todoListState';
+import { getTodos, todoListState, todosMultiplier } from '../../atoms/todoListState';
 
 export const useTodosState = () => {
     const [multiplier, setMultiplier] = useRecoilState(todosMultiplier);
-    const fetchingTodos = useRecoilValueLoadable(getTodosList);
     const [todos, setTodos] = useRecoilState(todoListState);
+    const fetchingTodos = useRecoilValueLoadable(getTodos);
+
     const [fetchingState, setFetchingState] = useState('loading');
 
     useEffect(() => {

@@ -1,21 +1,25 @@
 import React, { useCallback, useRef } from 'react';
 import { useTodosState } from './useTodosState';
+import { useTodosStateParsed } from "./useTodosStateParsed";
+import { useTodosStateParsedOld } from "./useTodosStateParsedOld";
 import TodoItem, { TodoItemInterface } from '../TodoItem/TodoItem';
 
 import './TodoList.css';
 
 const TodoList: React.FunctionComponent = () => {
     const { todos, fetchingState, loadMoreTodos } = useTodosState();
+    // const { todos, fetchingState, loadMoreTodos } = useTodosStateParsed();
+    // const { todos, fetchingState, loadMoreTodos } = useTodosStateParsedOld();
 
     const observer = useRef<IntersectionObserver | null>(null);
 
     const lastItem = useCallback((node) => {
-        if (observer.current) observer.current.disconnect();
+        observer.current && observer.current.disconnect();
         observer.current = new IntersectionObserver((entries) => {
             const target = entries[0];
-            if (target.isIntersecting) loadMoreTodos();
+            target.isIntersecting && loadMoreTodos();
         });
-        if (node) observer.current.observe(node);
+        node && observer.current.observe(node);
     }, []);
 
     return (

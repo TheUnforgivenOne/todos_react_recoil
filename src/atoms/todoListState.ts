@@ -14,13 +14,25 @@ export const todosMultiplier = atom<number>({
     default: 0,
 });
 
-export const getTodosList = selector({
-    key: 'getTodosList',
+export const getTodos = selector({
+    key: 'getTodos',
     get: async ({ get }) => {
         const multiplier = get(todosMultiplier);
         const query = `?_page=${multiplier}$_limit=10`;
 
         return await axios.get(fetchUrl + query)
             .then(res => res.data);
+    }
+});
+
+export const getTodosCustomStatus = selector({
+    key: 'getTodosCustomStatus',
+    get: async ({ get }) => {
+        const multiplier = get(todosMultiplier);
+        const query = `?_page=${multiplier}$_limit=10`;
+
+        const response = await axios.get(fetchUrl + query)
+            .then(res => res.data);
+        return { status: 'customStatus', fetchedData: response };
     }
 });
